@@ -25,3 +25,6 @@ Route.post('/session', 'SessionController.store')
 
 Route.post('/password', 'ForgotPasswordController.store')
 Route.put('/password', 'ForgotPasswordController.update')
+
+Route.post('/files', 'FilesController.store')
+Route.get('/files/:id', 'FilesController.show')
