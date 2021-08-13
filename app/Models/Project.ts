@@ -23,12 +23,12 @@ export default class Project extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => User, {
-    foreignKey: 'user_id' //default would be userId
+    foreignKey: 'user_id', //default would be userId
   })
   public user: BelongsTo<typeof User>
 
   @hasMany(() => Task, {
-    foreignKey: 'project_id'
+    foreignKey: 'project_id',
   })
   public tasks: HasMany<typeof Task>
 }

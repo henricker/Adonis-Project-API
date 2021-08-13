@@ -3,7 +3,7 @@ import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 export default class Tasks extends BaseSchema {
   protected tableName = 'tasks'
 
-  public async up () {
+  public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table
@@ -14,7 +14,7 @@ export default class Tasks extends BaseSchema {
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
         .notNullable()
-      
+
       table
         .integer('user_id')
         .unsigned()
@@ -22,7 +22,7 @@ export default class Tasks extends BaseSchema {
         .inTable('users')
         .onUpdate('CASCADE')
         .onDelete('SET NULL')
-      
+
       table
         .integer('file_id')
         .unsigned()
@@ -30,7 +30,7 @@ export default class Tasks extends BaseSchema {
         .inTable('files')
         .onUpdate('CASCADE')
         .onDelete('SET NULL')
-    
+
       table.string('title').notNullable()
       table.text('description')
       table.timestamp('due_date')
@@ -39,7 +39,7 @@ export default class Tasks extends BaseSchema {
     })
   }
 
-  public async down () {
+  public async down() {
     this.schema.dropTable(this.tableName)
   }
 }
