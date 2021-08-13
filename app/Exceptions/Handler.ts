@@ -13,10 +13,12 @@ export default class ExceptionHandler extends HttpExceptionHandler {
       return ctx.response.status(error.status).send(error.messages)
     
     if(error.code === 'E_UNAUTHORIZED_ACCESS')
-      return ctx.response.status(error.status).send({ errors: [ { name: 'E_UNAUTHORIZED_ACCESS', message: 'Not authorized' } ] })
+      return ctx.response.status(error.status).send({ errors: [ { name: error.code, message: 'Not authorized' } ] })
     
     if(error.code === 'E_INVALID_AUTH_UID')
-      return ctx.response.status(error.status).send({ errors: [ { name: 'E_INVALID_AUTH_UID', message: 'Invalid credentials' } ] })
+      return ctx.response.status(error.status).send({ errors: [ { name: error.code, message: 'Invalid credentials' } ] })
+    
+    return ctx.response.status(error.status).send({ errors: [ { name:  error.code, message: error.message } ] })
   }
 
 }

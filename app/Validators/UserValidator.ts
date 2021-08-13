@@ -16,7 +16,8 @@ export default class UserValidator {
 	password: schema.string({ trim: true }, [
 		rules.confirmed(),
 		rules.unique({ table: 'users', column: 'password'})
-	])
+	]),
+
 })
 
   public messages = {
@@ -25,6 +26,6 @@ export default class UserValidator {
 	'email.unique': 'Email already exists',
 	'emal.email': 'Email is invalid',
 	'password.maxLength': 'Password too short',
-	"password_confirmation.confirmed": "Password and confirmed password not match"
+	"password_confirmation.confirmed": "Password and confirmed password does not match"
   }
 }
