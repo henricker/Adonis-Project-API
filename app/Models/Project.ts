@@ -22,9 +22,13 @@ export default class Project extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(() => User)
+  @belongsTo(() => User, {
+    foreignKey: 'user_id' //default would be userId
+  })
   public user: BelongsTo<typeof User>
 
-  @hasMany(() => Task)
-  public task: HasMany<typeof Task>
+  @hasMany(() => Task, {
+    foreignKey: 'project_id'
+  })
+  public tasks: HasMany<typeof Task>
 }
