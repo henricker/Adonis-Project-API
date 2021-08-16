@@ -2,7 +2,8 @@
   "extends": ["plugin:adonis/typescriptApp", "prettier"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": ["error"]
+    "prettier/prettier": ["error"],
+    "@typescript-eslint/explicit-member-accessibility": "off"
   },
   "globals": {
     "use": true

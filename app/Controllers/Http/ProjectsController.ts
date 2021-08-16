@@ -5,8 +5,10 @@ import ProjectValidator from 'App/Validators/ProjectValidator'
 export default class ProjectsController {
   public async index({ request }: HttpContextContract) {
     const { page, limit } = request.qs()
-    
-    const projects = await Project.query().preload('user').paginate(page ?? 1, limit ?? 10)
+
+    const projects = await Project.query()
+      .preload('user')
+      .paginate(page ?? 1, limit ?? 10)
 
     return projects
   }

@@ -1,10 +1,17 @@
 import { DateTime } from 'luxon'
-import { afterCreate, BaseModel, beforeUpdate, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import {
+  afterCreate,
+  BaseModel,
+  beforeUpdate,
+  BelongsTo,
+  belongsTo,
+  column,
+} from '@ioc:Adonis/Lucid/Orm'
 import Project from './Project'
 import User from './User'
 import File from './File'
-import Mail from '@ioc:Adonis/Addons/Mail'
-import Application from '@ioc:Adonis/Core/Application';
+import MailerService from '../../resources/services/mail/mail'
+import MailerData from '../../resources/services/mail/mailer.interface'
 
 export default class Task extends BaseModel {
   @column({ isPrimary: true })
@@ -65,16 +72,23 @@ export default class Task extends BaseModel {
     const titleTask = task.title
     const file = task.file
 
-    await Mail.send(message => {
-      message
-        .htmlView('emails/new_task', { username, titleTask, titleProject, hasAttachment: !!file })
-        .to(email)
-        .from('henrique.vieira@luby.software', 'Henrique Vieira')
-        .subject(`New task of the ${titleProject} project`)
-
-      if (file)
-        message.attach(Application.tmpPath(`uploads/${file.file}`), { filename: file.name })
-    })
+    const mailerOptions: MailerData = {
+      to: email,
+      from: {
+        address: 'henrique.vieira@luby.software',
+        name: 'Henrique Vieira',
+      },
+      subject: `New task of the ${titleProject} project`,
+      htmlView: {
+        template: 'emails/new_task',
+        data: {
+          username,
+          titleTask,
+          titleProject,
+          hasAttachment: !!file,
+        },
+      },
+    }
+    await MailerService.sendMail(mailerOptions, file)
   }
-
 }
