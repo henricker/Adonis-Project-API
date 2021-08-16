@@ -30,10 +30,12 @@ export default class ProjectsController {
     return project
   }
 
-  public async update({ request, params }: HttpContextContract) {
+  public async update({ request, params, bouncer }: HttpContextContract) {
     await request.validate(ProjectValidator)
     const project = await Project.findByOrFail('id', params.id)
     const data = request.only(['title', 'description'])
+
+    await bouncer.authorize('updateProject', project)
 
     project.merge(data)
 
@@ -42,8 +44,11 @@ export default class ProjectsController {
     return project
   }
 
-  public async destroy({ params }: HttpContextContract) {
+  public async destroy({ params, bouncer }: HttpContextContract) {
     const project = await Project.findByOrFail('id', params.id)
+
+    await bouncer.authorize('deleteProject', project)
+
     await project.delete()
   }
 }

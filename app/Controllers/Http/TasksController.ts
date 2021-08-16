@@ -9,7 +9,7 @@ export default class TasksController {
   }
 
   public async store({ request, params }: HttpContextContract) {
-    await request.validate(TaskValidator);
+    await request.validate(TaskValidator)
     const data = request.only(['user_id', 'title', 'description', 'due_date', 'file_id'])
 
     const task = await Task.create({ ...data, project_id: params.project_id })
@@ -34,7 +34,8 @@ export default class TasksController {
     return task
   }
 
-  public async destroy({ params }: HttpContextContract) {
+  public async destroy({ params, bouncer }: HttpContextContract) {
+    await bouncer.authorize('deleteTask', params.project_id)
     const task = await Task.findByOrFail('id', params.id)
     await task.delete()
   }

@@ -8,6 +8,8 @@ import ResetPasswordValidator from 'App/Validators/ResetPasswordValidator'
 
 import MailerService from '../../../resources/services/mail/mail'
 import MailerData from 'resources/services/mail/mailer.interface'
+import Bull from '@ioc:Rocketseat/Bull'
+import Job from '../../Jobs/RegisterEmail'
 
 export default class ForgotPasswordsController {
   async store({ request }: HttpContextContract) {
@@ -36,7 +38,7 @@ export default class ForgotPasswordsController {
       },
     }
 
-    await MailerService.sendMail(mailerOptions)
+    Bull.add(new Job().key, { mailerOptions })
   }
 
   async update({ request, response }: HttpContextContract) {

@@ -33,4 +33,7 @@ export default Env.rules({
   REDIS_HOST: Env.schema.string({ format: 'host' }),
   REDIS_PORT: Env.schema.number(),
   REDIS_PASSWORD: Env.schema.string.optional(),
+  BULL_REDIS_HOST: Env.schema.string({ format: 'host' }),
+  BULL_REDIS_PORT: Env.schema.number(),
+  BULL_REDIS_PASSWORD: Env.schema.string.optional(),
 })

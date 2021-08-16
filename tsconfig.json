@@ -32,7 +32,9 @@
       "@adonisjs/auth",
       "@adonisjs/mail",
       "@adonisjs/view",
-      "@adonisjs/redis"
+      "@adonisjs/redis",
+      "@adonisjs/bouncer",
+      "@rocketseat/adonis-bull"
     ]
   }
 }

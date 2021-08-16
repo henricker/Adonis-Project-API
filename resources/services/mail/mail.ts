@@ -9,6 +9,7 @@ export default class MailerService {
     mailerData: MailerData,
     attachFile?: BelongsTo<typeof File, LucidModel>
   ): Promise<void> {
+    console.log(mailerData)
     await Mail.send((message) => {
       message
         .to(mailerData.to)

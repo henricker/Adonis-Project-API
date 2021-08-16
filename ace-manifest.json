@@ -278,6 +278,95 @@
       ],
       "aliases": [],
       "flags": []
+    },
+    "make:policy": {
+      "settings": {},
+      "commandPath": "@adonisjs/bouncer/build/commands/MakePolicy",
+      "commandName": "make:policy",
+      "description": "Make a new bouncer policy",
+      "args": [
+        {
+          "type": "string",
+          "propertyName": "name",
+          "name": "name",
+          "required": true,
+          "description": "Name of the policy to create"
+        }
+      ],
+      "aliases": [],
+      "flags": [
+        {
+          "name": "resource-model",
+          "propertyName": "resourceModel",
+          "type": "string",
+          "description": "Name of the resource model to authorize"
+        },
+        {
+          "name": "user-model",
+          "propertyName": "userModel",
+          "type": "string",
+          "description": "Name of the user model to be authorized"
+        },
+        {
+          "name": "actions",
+          "propertyName": "actions",
+          "type": "array",
+          "description": "Actions to implement"
+        }
+      ]
+    },
+    "make:job": {
+      "settings": {},
+      "commandPath": "@rocketseat/adonis-bull/build/commands/MakeJob",
+      "commandName": "make:job",
+      "description": "Make a new Bull job",
+      "args": [
+        {
+          "type": "string",
+          "propertyName": "name",
+          "name": "name",
+          "required": true,
+          "description": "Name of the job class"
+        }
+      ],
+      "aliases": [],
+      "flags": []
+    },
+    "bull:exception": {
+      "settings": {},
+      "commandPath": "@rocketseat/adonis-bull/build/commands/MakeException",
+      "commandName": "bull:exception",
+      "description": "Make a Bull exception handle file",
+      "args": [],
+      "aliases": [],
+      "flags": []
+    },
+    "bull:listen": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": true
+      },
+      "commandPath": "@rocketseat/adonis-bull/build/commands/Listen",
+      "commandName": "bull:listen",
+      "description": "Start the Bull listener",
+      "args": [],
+      "aliases": [],
+      "flags": [
+        {
+          "name": "board",
+          "propertyName": "board",
+          "type": "boolean",
+          "description": "Run bull's dashboard",
+          "alias": "b"
+        },
+        {
+          "name": "port",
+          "propertyName": "port",
+          "type": "number",
+          "description": "Run bull's dashboard in the provided port",
+          "alias": "p"
+        }
+      ]
     }
   },
   "aliases": {}
